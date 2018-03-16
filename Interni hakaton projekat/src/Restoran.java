@@ -24,7 +24,7 @@ public class Restoran {
 		
 	}
 	
-	// Seteri i Geteri 
+	// Seteri i Geteri, JavaBeans specifikacija
 	public String getNaziv() {
 		return naziv;
 	}
