@@ -136,7 +136,7 @@ public class Restoran {
 	
 	// Globalne (staticke) metode
 	// Nije potrebno inicijalizovati objekat date klase da bi se metoda koristila, vec se
-	// poziv vrsi preko naziva klase
+	// poziv vrsi preko naziva klase u kojoj je metoda definisana
 	static void brojRestorana() {
 		System.out.println("Trenutni broj restorana: "  + brojRestorana);
 	}
