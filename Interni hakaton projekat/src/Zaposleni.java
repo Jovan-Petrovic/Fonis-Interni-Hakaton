@@ -21,3 +21,5 @@ public abstract class Zaposleni {
 	public abstract void izracunajPlatu(int brojSati);
 	
 }
+
+

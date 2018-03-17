@@ -1,6 +1,4 @@
 
-// Nasledjivanje (upotrebom rezervisane reci extends)
-
 public class Kelner extends Zaposleni{
 	 
 	public Kelner(String ime, String prezime, String jmbg) {
@@ -20,5 +18,13 @@ public class Kelner extends Zaposleni{
 		plata = 150 * brojSati;
 		System.out.println("Plata: " + plata);
 	}
+
+	@Override
+	public String toString() {
+		return "\nGlavni kelner\nIme: " + ime + ", prezime: " + prezime + ", jmbg: " + jmbg;
+	}
+	
+	
 	
 }
+

@@ -16,4 +16,13 @@ public class Vlasnik {
 		System.out.println("Jmbg: " + jmbg);
 	}
 	
+	// toString metoda - po konvenciji se koristi za vracanje vrednosti svih atributa klase spojene u jedan String
+	// To se postize kada syso naredbi prosledimo samo naziv objekta (moze i nazivObjekta.toString)
+	@Override
+	public String toString() {
+		return "Ime: " + ime + ", prezime: " + prezime + ", jmbg: " + jmbg;
+	}
+	
+	
+	
 }

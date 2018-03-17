@@ -16,4 +16,11 @@ public class SefKuhinje extends Zaposleni{
 		System.out.println("Plata: " + plata);
 	}
 
+	@Override
+	public String toString() {
+		return "\nSef kuhinje\nIme: " + ime + ", prezime: " + prezime + ", jmbg: " + jmbg;
+	}
+	
+	
+	
 }

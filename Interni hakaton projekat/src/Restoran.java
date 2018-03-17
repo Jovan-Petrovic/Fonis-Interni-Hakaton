@@ -214,7 +214,8 @@ public class Restoran implements SluzbaNabavke, SluzbaProdaje{
 	public void ispisiVlasnika() {
 		System.out.println("\nVlasnik");
 		// Direktno se poziva metoda ispisi klase osoba da bi se ispisalo ime i prezime vlasnika
-		vlasnik.ispisi();
+		//vlasnik.ispisi();
+		System.out.println(vlasnik);
 	}
 	
 	// Ciklicno ponavljanje - for petlja

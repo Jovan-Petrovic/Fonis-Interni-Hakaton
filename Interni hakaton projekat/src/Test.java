@@ -72,17 +72,19 @@ public class Test {
 		
 		
 		
-		//donjiGrad.sveOrestoranu();
-		//donjiGrad.matricneMetode();
+		donjiGrad.sveOrestoranu();
+		donjiGrad.matricneMetode();
 		
 		donjiGrad.glavniKelner = new Kelner("Zoran", "Zivkovic", "0206996532653");
 		donjiGrad.sefKuhinje = new SefKuhinje("Petar", "Stojanovic", "0911992563565");
-		/*
-		donjiGrad.glavniKelner.ispisi();
+		
+		System.out.println(donjiGrad.glavniKelner);
+		//donjiGrad.glavniKelner.ispisi();
 		donjiGrad.glavniKelner.izracunajPlatu(100);
-		donjiGrad.sefKuhinje.ispisi();
+		System.out.println(donjiGrad.sefKuhinje);
+		//donjiGrad.sefKuhinje.ispisi();
 		donjiGrad.sefKuhinje.izracunajPlatu(100);
-		*/
+		
 		// Primer kako ista metoda moze da opsluzuje vise klasa ako se koriste interfejsi. Kada se oni ne bi koristili, 
 		// morale bi da se u okviru klase Dobavljac napisu dve metode izvrsiIsporuku koje bi radile isto samo bi jedna
 		// bila zaduzena za klasu Restoran, a druga za klasu Prodavnica
