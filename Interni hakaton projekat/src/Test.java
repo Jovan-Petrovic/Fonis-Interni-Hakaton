@@ -1,8 +1,6 @@
 
 import java.util.GregorianCalendar;
 
-import java.util.GregorianCalendar;
-
 public class Test {
 
 	public static void main(String[] args) {
@@ -74,16 +72,45 @@ public class Test {
 		
 		
 		
-		donjiGrad.sveOrestoranu();
+		//donjiGrad.sveOrestoranu();
 		//donjiGrad.matricneMetode();
 		
 		donjiGrad.glavniKelner = new Kelner("Zoran", "Zivkovic", "0206996532653");
 		donjiGrad.sefKuhinje = new SefKuhinje("Petar", "Stojanovic", "0911992563565");
-		
+		/*
 		donjiGrad.glavniKelner.ispisi();
 		donjiGrad.glavniKelner.izracunajPlatu(100);
 		donjiGrad.sefKuhinje.ispisi();
 		donjiGrad.sefKuhinje.izracunajPlatu(100);
+		*/
+		// Primer kako ista metoda moze da opsluzuje vise klasa ako se koriste interfejsi. Kada se oni ne bi koristili, 
+		// morale bi da se u okviru klase Dobavljac napisu dve metode izvrsiIsporuku koje bi radile isto samo bi jedna
+		// bila zaduzena za klasu Restoran, a druga za klasu Prodavnica
+		Ostava donjiGradOstava = new Ostava();
+		Dobavljac donjiGradDobavljac = new Dobavljac();
+		
+		donjiGrad.namirnice = 300;
+		donjiGrad.pice = 420;
+		donjiGradOstava.stanjeNaSkladistuNamirnice = 100;
+		donjiGradOstava.stanjeNaSkladistuPice = 110;
+		
+		System.out.println();
+		donjiGrad.ispisiStanje();
+		donjiGradOstava.ispisiStanje();
+		System.out.println("Isporuka za restoran");
+		// Metodi izvrsiIsporuku se moze kao parametar proslediti objekat klase Restoran jer ova klasa implementira
+		// interfejs SluzbaNabavke. Onda se u okviru metode izvrsiIsporuku preko interfejsa SluzbaNabavke pozivaju metode
+		// dodajNamirnice i dodajPice klase Restoran
+		donjiGradDobavljac.izvrsiIsporuku(donjiGrad, 75, 38);
+		System.out.println("Isporuka za ostavu");
+		// Metodi izvrsiIsporuku se moze kao parametar proslediti objekat klase Ostava jer ova klasa implementira
+		// interfejs SluzbaNabavke. Onda se u okviru metode izvrsiIsporuku preko interfejsa SluzbaNabavke pozivaju metode
+		// dodajNamirnice i dodajPice klase ostava
+		donjiGradDobavljac.izvrsiIsporuku(donjiGradOstava, 12, 17);
+		System.out.println("Novo stanje restorana");
+		donjiGrad.ispisiStanje();
+		System.out.println("Novo stanje ostave");
+		donjiGradOstava.ispisiStanje();
 		
 	}
 

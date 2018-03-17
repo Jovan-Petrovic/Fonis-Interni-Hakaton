@@ -3,7 +3,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
-public class Restoran {
+// Jedna klasa moze istovremeno da implementira vise interfejsa, i to se oznacava uz pomoc rezervisane reci "implements"
+public class Restoran implements SluzbaNabavke, SluzbaProdaje{
 	private String naziv;
 	private String opstina;
 	private String adresa;
@@ -26,7 +27,7 @@ public class Restoran {
 	
 	// Kelner glavniKelner1;
 	Kelner glavniKelner;
-
+	
 	// Upotreba konstruktora, this naredba
 	Restoran(String naziv, String opstina, String adresa, int[] ocene, int brojMesta, Vlasnik vlasnik, SefKuhinje sefKuhinje) {
 		this.naziv = naziv;  
@@ -368,4 +369,51 @@ public class Restoran {
 		System.out.println("Najstariji restoran: " + najstariji + ". Datum otvaranja: " + datumOtvaranja);
 	}
 	
+	int namirnice;
+	int pice;
+	
+	
+	// Metode koje implementiraju metode iz interfejsa moraju da budu javne (public)
+	@Override
+	public void prodajHranu(int kolicina) {
+		if(kolicina > 0 && namirnice >= kolicina) namirnice -= kolicina;
+		else {
+			if(kolicina < 0) System.out.println("Kolicina mora biti veca od nule");
+			else System.out.println("Nema dovoljno namirnica za pripremu hrane");
+		}
+	}
+
+	@Override
+	public void prodajPice(int kolicina) {
+		if(kolicina > 0 && pice >= kolicina) pice -= kolicina;
+		else {
+			if(kolicina < 0) System.out.println("Kolicina mora biti veca od nule");
+			else System.out.println("Nema dovoljno pica za uslugu gostiju");
+		}
+	}
+
+	@Override
+	public void dodajNamirnice(int kolicina) {
+		if(kolicina > 0) namirnice += kolicina;
+		else System.out.println("Kolicina mora biti veca od nule");
+	}
+
+	@Override
+	public void dodajPice(int kolicina) {
+		if(kolicina > 0) pice += kolicina;
+		else System.out.println("Kolicina mora biti veca od nule");
+	}
+	
+	public void ispisiStanjeNamirnice() {
+		System.out.println("U restoranu ima: " + namirnice + " kg namirnica.");
+	}
+	
+	public void ispisiStanjePice() {
+		System.out.println("U restoranu ima: " + pice + "l pica.");
+	}
+	
+	public void ispisiStanje() {
+		ispisiStanjeNamirnice();
+		ispisiStanjePice();
+	}
 }

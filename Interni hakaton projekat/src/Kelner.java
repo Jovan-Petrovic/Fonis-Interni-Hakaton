@@ -22,4 +22,3 @@ public class Kelner extends Zaposleni{
 	}
 	
 }
-
