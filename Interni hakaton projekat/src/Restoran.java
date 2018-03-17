@@ -23,6 +23,9 @@ public class Restoran {
 	// Asocijacija - tip podataka atributa druga klasa asocijacije
 	Osoba vlasnik;
 	Osoba sefKuhinje;
+	
+	// Kelner glavniKelner1;
+	Osoba glavniKelner;
 
 	// Upotreba konstruktora, this naredba
 	Restoran(String naziv, String opstina, String adresa, int[] ocene, int brojMesta, Osoba vlasnik, Osoba sefKuhinje) {
@@ -221,7 +224,7 @@ public class Restoran {
 		sefKuhinje.ispisi();
 	}
 	
-	// Ciklicno ponavljeanje - for petlja
+	// Ciklicno ponavljanje - for petlja
 	public void maxOcenaRestorana() {
 		for(int i = 0; i < ocene.length; i++) {
 			if(ocene[i] > maxOcena) maxOcena = ocene[i];
@@ -321,6 +324,7 @@ public class Restoran {
 		maxOcenaRestorana();
 		minOcenaRestorana();
 		oceniRestoran();
+		ispisiKelnera();
 	}
 	
 	public void matricneMetode() {
@@ -371,5 +375,11 @@ public class Restoran {
 			if(restorani[i].datumOtvaranja.before(najstariji)) najstariji = restorani[i];
 		}
 		System.out.println("Najstariji restoran: " + najstariji + ". Datum otvaranja: " + datumOtvaranja);
+	}
+	
+	public void ispisiKelnera() {
+		System.out.println("Glavni kelner ");
+		// Poziva se redefinisana metoda "ispisi" klase Kelner
+		glavniKelner.ispisi();
 	}
 }

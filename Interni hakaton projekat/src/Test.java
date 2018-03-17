@@ -43,16 +43,21 @@ public class Test {
 									};
 		donjiGrad.setMatrica(slobodnaMesta);
 		// Atribut vlasnik je objekat klase Osoba pa prvo mora da se inicijalizuje
-		donjiGrad.vlasnik = new Osoba();
+		donjiGrad.vlasnik = new Osoba("Marko", "Milicic", "0503652852635");
+		// 2. nacin, dodeljivanje vrednosti atributima objekta klase Osoba da nije koriscen konstruktor
+		/*
 		donjiGrad.vlasnik.ime = "Marko";
 		donjiGrad.vlasnik.prezime = "Maric";
 		donjiGrad.vlasnik.jmbg = "0503652852635";
+		*/
 		donjiGrad.setVlasnik(donjiGrad.vlasnik);
 		
-		donjiGrad.sefKuhinje = new Osoba();
+		donjiGrad.sefKuhinje = new Osoba("Petar", "Petrovic", "1202325685215");
+		/*
 		donjiGrad.sefKuhinje.ime = "Petar";
 		donjiGrad.sefKuhinje.prezime = "Petrovic";
 		donjiGrad.sefKuhinje.jmbg = "1202325685215";
+		*/
 		donjiGrad.setSefKuhinje(donjiGrad.sefKuhinje);
 		GregorianCalendar datOtv = new GregorianCalendar();
 		datOtv.set(2012,9,15);
@@ -64,6 +69,13 @@ public class Test {
 		Restoran.otvoriRestoran();
 		Restoran.zatvoriRestoran();
 		*/
+		
+		// Kompatibilnost klasa - promenljivoj tipa Osoba (nadklasa) smo dodelili objekat klase Kelner (podklasa)
+		// U ovom slucaju se mogu pozvati samo metode koje postoje i u nadklasi, s tim sto ce se aktivirati redefinisane
+		// metode iz podklase (ako postoje), a ne originalne
+		donjiGrad.glavniKelner = new Kelner("Zoran", "Zivkovic", "0206996532653", 38000);
+		// Kastovanje klasa - ukoliko zelimo da povratimo punu funkcionalnost
+		// Kelner donjiGrad.glavniKelner1 = (Kelner) (donjiGrad.glavniKelner);
 		
 		donjiGrad.sveOrestoranu();
 		//donjiGrad.matricneMetode();
