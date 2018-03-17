@@ -8,15 +8,22 @@ public class Restoran {
 	int[] ocene;
 	private int brojMesta;
 	
+	// Globalana promenljiva
+	static int brojRestorana = 100;
 	
-	
-	// Upotreba konstruktora, "this" naredba
-	Restoran(String naziv, String opstina, String adresa, int[] ocene, int brojMesta) {
+	// Asocijacija - tip podataka atributa druga klasa asocijacije
+	Osoba vlasnik;
+	Osoba sefKuhinje;
+
+	// Upotreba konstruktora, this naredba
+	Restoran(String naziv, String opstina, String adresa, int[] ocene, int brojMesta, Osoba vlasnik, Osoba sefKuhinje) {
 		this.naziv = naziv;  
 		this.opstina = opstina;
 		this.adresa = adresa;
 		this.ocene = ocene;
 		this.brojMesta = brojMesta;
+		this.vlasnik = vlasnik;
+		this.sefKuhinje = sefKuhinje;
 	}
 	
 	// Prazan konstruktor
@@ -24,7 +31,7 @@ public class Restoran {
 		
 	}
 	
-	// Seteri i Geteri, JavaBeans specifikacija
+	// Seteri i Geteri 
 	public String getNaziv() {
 		return naziv;
 	}
@@ -66,6 +73,32 @@ public class Restoran {
 		this.ocene = ocene;
 	}
 	
+	public static int getBrojRestorana() {
+		return brojRestorana;
+	}
+
+	public static void setBrojRestorana(int brojRestorana) {
+		Restoran.brojRestorana = brojRestorana;
+	}
+
+	public Osoba getVlasnik() {
+		return vlasnik;
+	}
+	
+	// Relacija koriscenja
+	// Klasa koristi objekat druge klase u okviru svoje metode. Nebitno da li kao parametar, povratnu vrednost ili u telu metode
+	public void setVlasnik(Osoba vlasnik) {
+		this.vlasnik = vlasnik;
+	}
+	
+	public Osoba getSefKuhinje() {
+		return sefKuhinje;
+	}
+
+	public void setSefKuhinje(Osoba sefKuhinje) {
+		this.sefKuhinje = sefKuhinje;
+	}
+
 	// Metode klase
 	public void ispisiNaziv() {
 		System.out.println("Naziv restorana: " + naziv);
@@ -112,8 +145,6 @@ public class Restoran {
 	public void oceniRestoran() {
 		Scanner in = new Scanner(System.in);
 		System.out.println("Unesite ocenu koju biste dali restoranu " + naziv + ": (1-10)");
-		// Metoda "nextInt" ucitava jedan red znakova sa tastature, pretvara ga u ceo broj
-		// i vraca taj broj kao povratnu vrednost.
 		int novaOcena = in.nextInt();
 		//in.close();
 		if(novaOcena >= 1 && novaOcena <= 10) {
@@ -129,14 +160,7 @@ public class Restoran {
 		}
 	}
 	
-	// Globalana promenljiva
-	// Nije vezana ni za jedan objekat, koriscenje ove promenljive ne podrazumeva inicijalizaciju 
-	// objekta klase, vec joj se pristupa direktno preko naziva klase 
-	static int brojRestorana = 100;
-	
 	// Globalne (staticke) metode
-	// Nije potrebno inicijalizovati objekat date klase da bi se metoda koristila, vec se
-	// poziv vrsi preko naziva klase u kojoj je metoda definisana
 	static void brojRestorana() {
 		System.out.println("Trenutni broj restorana: "  + brojRestorana);
 	}
@@ -151,12 +175,30 @@ public class Restoran {
 		System.out.println("Trenutni broj restorana (nakon zatvaranja postojeceg): "  + brojRestorana);
 	}
 	
+	/*
+	public void podaciOVlasniku() {
+		System.out.println("Ime vlasnika: " + vlasnik.ime);
+		System.out.println("Prezime vlasnika: " + vlasnik.prezime);
+	}
+	*/
+	
+	public void ispisi() {
+		System.out.println("Vlasnik");
+		// Direktno se poziva metoda ispisi klase osoba da bi se ispisalo ime i prezime vlasnika
+		vlasnik.ispisi();
+		
+		System.out.println("Sef kuhinje");
+		// Direktno se poziva metoda ispisi klase osoba da bi se ispisalo ime i prezime sefa kuhinje
+		sefKuhinje.ispisi();
+	}
+	
 	// Pozivanje svih metoda odjednom
 	public void sveOrestoranu() {
 		ispisiNaziv();
 		nazivOpstine();
 		adresaRestorana();
 		velicinaRestorana();
+		ispisi();
 		ocenaRestorana();
 		oceniRestoran();
 	}
