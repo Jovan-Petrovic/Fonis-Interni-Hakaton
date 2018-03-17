@@ -10,6 +10,9 @@ public class Restoran {
 	private double ocena;
 	private int maxOcena = 0;
 	private int minOcena = 10;
+	private boolean imaLiSlobodnihMesta;
+	boolean[][] matrica;
+	int slobodniStolovi = 0;
 	
 	// Globalana promenljiva
 	static int brojRestorana = 100;
@@ -100,6 +103,16 @@ public class Restoran {
 
 	public void setSefKuhinje(Osoba sefKuhinje) {
 		this.sefKuhinje = sefKuhinje;
+	}
+	
+	
+	
+	public boolean[][] getMatrica() {
+		return matrica;
+	}
+
+	public void setMatrica(boolean[][] matrica) {
+		this.matrica = matrica;
 	}
 
 	// Metode klase
@@ -215,6 +228,76 @@ public class Restoran {
 		System.out.println("Mnimalna ocena restorana: " + minOcena);
 	}
 	
+	// Dvodimenzionalan niz - matrica
+	public void zauzetostStolova() {
+		for(int i = 0; i < matrica.length; i++) {
+			for(int j = 0; j < matrica[0].length; j++) {
+				if(matrica[i][j] == true) slobodniStolovi++;
+			}
+		}
+		System.out.println("\nSlobodnih stolova: " + slobodniStolovi);
+	}
+	
+	public boolean imaLiSlobodnih() {
+		for(int i = 0; i < matrica.length; i++) {
+			for(int j = 0; j < matrica[0].length; j++) {
+				if(matrica[i][j] == true) return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean imaLiZauzetih() {
+		for(int i = 0; i < matrica.length; i++) {
+			for(int j = 0; j < matrica[0].length; j++) {
+				if(matrica[i][j] == false) return true;
+			}
+		}
+		return false;
+	}
+	
+	public void popuniSto() {
+		boolean provera = imaLiSlobodnih();
+		if(provera) {
+			for(int i = 0; i < matrica.length; i++) {
+				for(int j = 0; j < matrica.length; j++) {
+					if(matrica[i][j] == true) {
+						matrica[i][j] = false;
+						slobodniStolovi--;
+						System.out.println("Popunjen je prvi slobodan sto.");
+						return;
+					}
+				}
+			}
+		}
+	}
+	
+	public void isprazniSto() {
+		boolean provera = imaLiZauzetih();
+		int red = 0;
+		int kolona = 0;
+		if(provera) {
+			Scanner in1 = new Scanner(System.in);
+			Scanner in2 = new Scanner(System.in);
+			System.out.println("Unesite red stola kojeg zelite da ispraznite:");
+			red = in1.nextInt();
+			System.out.println("Unesite kolonu stola kojeg zelite da ispraznite:");
+			kolona = in2.nextInt();
+			matrica[red - 1][kolona - 1] = true;
+		}
+		System.out.println("Ispraznjen je sto u redu " + red + " i koloni " + kolona);
+	}
+	
+	public void tabelaZauzetostistolova() {
+		System.out.println("Tabela zauzetosti stolova: (false - zauzet, true - slobodan)");
+		for(int i = 0; i < matrica.length; i++) {
+			for(int j = 0; j < matrica[0].length; j++) {
+				System.out.print(matrica[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
+	
 	// Pozivanje svih metoda odjednom
 	public void sveOrestoranu() {
 		ispisiNaziv();
@@ -226,6 +309,17 @@ public class Restoran {
 		maxOcenaRestorana();
 		minOcenaRestorana();
 		oceniRestoran();
+	}
+	
+	public void matricneMetode() {
+		zauzetostStolova();
+		tabelaZauzetostistolova();
+		System.out.println();
+		popuniSto();
+		tabelaZauzetostistolova();
+		isprazniSto();
+		System.out.println();
+		tabelaZauzetostistolova();
 	}
 	
 }

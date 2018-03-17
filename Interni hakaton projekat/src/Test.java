@@ -22,12 +22,24 @@ public class Test {
 		Restoran donjiGrad =  new Restoran();
 		
 		donjiGrad.setNaziv("Donji grad");
-		donjiGrad.setOpstina("Stari 9grad");
+		donjiGrad.setOpstina("Stari Grad");
 		donjiGrad.setAdresa("Visokog Stefana 54");
-		int[] oceneDonjiGrad = {8,6,7,7,8,5,9,6,8,7};
+		int[] oceneDonjiGrad = {8,6,7,7,8,5,9,6,8,7}; // Inicijalizacija niza - 1. nacin
+		// Inicijalizacija niza - 2. nacin
+		/*
+		int[] oceneDonjiGrad = new int[10];
+		oceneDonjigrad[0] = 8;
+		...
+		oceneDonjiGrad[9] = 7;
+		 */
 		donjiGrad.setOcene(oceneDonjiGrad);
-		donjiGrad.setBrojMesta(85);
-		
+		donjiGrad.setBrojMesta(20);
+		boolean[][] slobodnaMesta = {{false,false,false,false,false},
+									{false,false,true,false,false},
+									{false,false,false,true,false},
+									{false,false,false,false,false}
+									};
+		donjiGrad.setMatrica(slobodnaMesta);
 		// Atribut vlasnik je objekat klase Osoba pa prvo mora da se inicijalizuje
 		donjiGrad.vlasnik = new Osoba();
 		donjiGrad.vlasnik.ime = "Marko";
@@ -41,14 +53,17 @@ public class Test {
 		donjiGrad.sefKuhinje.jmbg = "1202325685215";
 		donjiGrad.setSefKuhinje(donjiGrad.sefKuhinje);
 		
-		donjiGrad.sveOrestoranu();
-		
 		// Poziv staticke metode - bez inicijalizacije objekta
 		/*
 		Restoran.brojRestorana();
 		Restoran.otvoriRestoran();
 		Restoran.zatvoriRestoran();
 		*/
+		
+		donjiGrad.sveOrestoranu();
+		donjiGrad.matricneMetode();
+		
+		
 		
 	}
 
