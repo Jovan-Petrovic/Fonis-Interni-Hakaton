@@ -21,14 +21,14 @@ public class Restoran {
 	static int brojRestorana = 100;
 	
 	// Asocijacija - tip podataka atributa druga klasa asocijacije
-	Osoba vlasnik;
-	Osoba sefKuhinje;
+	Vlasnik vlasnik;
+	SefKuhinje sefKuhinje;
 	
 	// Kelner glavniKelner1;
-	Osoba glavniKelner;
+	Kelner glavniKelner;
 
 	// Upotreba konstruktora, this naredba
-	Restoran(String naziv, String opstina, String adresa, int[] ocene, int brojMesta, Osoba vlasnik, Osoba sefKuhinje) {
+	Restoran(String naziv, String opstina, String adresa, int[] ocene, int brojMesta, Vlasnik vlasnik, SefKuhinje sefKuhinje) {
 		this.naziv = naziv;  
 		this.opstina = opstina;
 		this.adresa = adresa;
@@ -93,26 +93,22 @@ public class Restoran {
 		Restoran.brojRestorana = brojRestorana;
 	}
 
-	public Osoba getVlasnik() {
-		return vlasnik;
-	}
-	
-	// Relacija koriscenja
-	// Klasa koristi objekat druge klase u okviru svoje metode. Nebitno da li kao parametar, povratnu vrednost ili u telu metode
-	public void setVlasnik(Osoba vlasnik) {
-		this.vlasnik = vlasnik;
-	}
-	
-	public Osoba getSefKuhinje() {
+	public Zaposleni getSefKuhinje() {
 		return sefKuhinje;
 	}
 
-	public void setSefKuhinje(Osoba sefKuhinje) {
+	public void setSefKuhinje(SefKuhinje sefKuhinje) {
 		this.sefKuhinje = sefKuhinje;
 	}
 	
-	
-	
+	public Vlasnik getVlasnik() {
+		return vlasnik;
+	}
+
+	public void setVlasnik(Vlasnik vlasnik) {
+		this.vlasnik = vlasnik;
+	}
+
 	public boolean[][] getMatrica() {
 		return matrica;
 	}
@@ -214,14 +210,10 @@ public class Restoran {
 	}
 	*/
 	
-	public void ispisi() {
+	public void ispisiVlasnika() {
 		System.out.println("\nVlasnik");
 		// Direktno se poziva metoda ispisi klase osoba da bi se ispisalo ime i prezime vlasnika
 		vlasnik.ispisi();
-		
-		System.out.println("\nSef kuhinje");
-		// Direktno se poziva metoda ispisi klase osoba da bi se ispisalo ime i prezime sefa kuhinje
-		sefKuhinje.ispisi();
 	}
 	
 	// Ciklicno ponavljanje - for petlja
@@ -319,12 +311,11 @@ public class Restoran {
 		adresaRestorana();
 		velicinaRestorana();
 		datumOtvaranja();
-		ispisi();		
+		ispisiVlasnika();		
 		ocenaRestorana();
 		maxOcenaRestorana();
 		minOcenaRestorana();
 		oceniRestoran();
-		ispisiKelnera();
 	}
 	
 	public void matricneMetode() {
@@ -349,8 +340,8 @@ public class Restoran {
 	}
 	
 	// Nizovi objekata, substring metoda, konverzija iz stringa u int koriscenjem parseInt metode
-	public Osoba[] rodjeniPosle1970(Osoba[] osobe) {
-		Osoba[] vlasniciPosle1970 = new Osoba[1000];
+	public Zaposleni[] rodjeniPosle1970(Zaposleni[] osobe) {
+		Zaposleni[] vlasniciPosle1970 = new Zaposleni[1000];
 		int br = 0;
 		for(int i  = 0; i < osobe.length; i++) {
 			String godina = osobe[i].jmbg.substring(5,8);
@@ -377,9 +368,4 @@ public class Restoran {
 		System.out.println("Najstariji restoran: " + najstariji + ". Datum otvaranja: " + datumOtvaranja);
 	}
 	
-	public void ispisiKelnera() {
-		System.out.println("Glavni kelner ");
-		// Poziva se redefinisana metoda "ispisi" klase Kelner
-		glavniKelner.ispisi();
-	}
 }
