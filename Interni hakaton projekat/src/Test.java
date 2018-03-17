@@ -1,4 +1,6 @@
 
+import java.util.GregorianCalendar;
+
 public class Test {
 
 	public static void main(String[] args) {
@@ -52,6 +54,9 @@ public class Test {
 		donjiGrad.sefKuhinje.prezime = "Petrovic";
 		donjiGrad.sefKuhinje.jmbg = "1202325685215";
 		donjiGrad.setSefKuhinje(donjiGrad.sefKuhinje);
+		GregorianCalendar datOtv = new GregorianCalendar();
+		datOtv.set(2012,9,15);
+		donjiGrad.setDatumOtvaranja(datOtv);
 		
 		// Poziv staticke metode - bez inicijalizacije objekta
 		/*
@@ -61,7 +66,7 @@ public class Test {
 		*/
 		
 		donjiGrad.sveOrestoranu();
-		donjiGrad.matricneMetode();
+		//donjiGrad.matricneMetode();
 		
 		
 		

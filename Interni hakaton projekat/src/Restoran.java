@@ -1,4 +1,6 @@
 
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 public class Restoran {
@@ -13,6 +15,7 @@ public class Restoran {
 	private boolean imaLiSlobodnihMesta;
 	boolean[][] matrica;
 	int slobodniStolovi = 0;
+	GregorianCalendar datumOtvaranja;  // Klasa gregorianCalendar
 	
 	// Globalana promenljiva
 	static int brojRestorana = 100;
@@ -113,6 +116,14 @@ public class Restoran {
 
 	public void setMatrica(boolean[][] matrica) {
 		this.matrica = matrica;
+	}
+	
+	public GregorianCalendar getDatumOtvaranja() {
+		return datumOtvaranja;
+	}
+
+	public void setDatumOtvaranja(GregorianCalendar date) {
+		this.datumOtvaranja = date;
 	}
 
 	// Metode klase
@@ -304,7 +315,8 @@ public class Restoran {
 		nazivOpstine();
 		adresaRestorana();
 		velicinaRestorana();
-		ispisi();
+		datumOtvaranja();
+		ispisi();		
 		ocenaRestorana();
 		maxOcenaRestorana();
 		minOcenaRestorana();
@@ -322,4 +334,42 @@ public class Restoran {
 		tabelaZauzetostistolova();
 	}
 	
+	// Rad sa stringovima, metoda compareTo
+	public void restoraniIzStarogGrada(Restoran[] restorani) {
+		System.out.println("Restorani iz Starog Grada:");
+		for(int i = 0; i < restorani.length; i++) {
+			if(restorani[i].opstina.compareTo("Stari Grad") == 0) {
+				System.out.println(restorani[i].naziv + ", ");
+			}
+		}
+	}
+	
+	// Nizovi objekata, substring metoda, konverzija iz stringa u int koriscenjem parseInt metode
+	public Osoba[] rodjeniPosle1970(Osoba[] osobe) {
+		Osoba[] vlasniciPosle1970 = new Osoba[1000];
+		int br = 0;
+		for(int i  = 0; i < osobe.length; i++) {
+			String godina = osobe[i].jmbg.substring(5,8);
+			int godina1 = Integer.parseInt(godina);
+			if(godina1 > 970) vlasniciPosle1970[br++] = osobe[i];
+		}
+		if(br == 0) {
+			System.out.println("Nema vlasnika rodjenih posle 1970. godine");
+			return null;
+		}
+		return vlasniciPosle1970;
+	}
+	
+	// Upotreba GregorianCalendar-a
+	public void datumOtvaranja() {
+		System.out.println("Datum otvarnja: " + datumOtvaranja);
+	}
+	
+	public void najstarijiRestoran(Restoran[] restorani) {
+		Restoran najstariji = restorani[0];
+		for(int i = 1; i < restorani.length; i++) {
+			if(restorani[i].datumOtvaranja.before(najstariji)) najstariji = restorani[i];
+		}
+		System.out.println("Najstariji restoran: " + najstariji + ". Datum otvaranja: " + datumOtvaranja);
+	}
 }
