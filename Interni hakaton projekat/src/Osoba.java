@@ -9,4 +9,5 @@ public class Osoba {
 		System.out.println("Prezime: " + prezime);
 		System.out.println("Jmbg: " + jmbg);
 	}
+	
 }

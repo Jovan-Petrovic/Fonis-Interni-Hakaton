@@ -22,7 +22,7 @@ public class Test {
 		Restoran donjiGrad =  new Restoran();
 		
 		donjiGrad.setNaziv("Donji grad");
-		donjiGrad.setOpstina("Stari grad");
+		donjiGrad.setOpstina("Stari 9grad");
 		donjiGrad.setAdresa("Visokog Stefana 54");
 		int[] oceneDonjiGrad = {8,6,7,7,8,5,9,6,8,7};
 		donjiGrad.setOcene(oceneDonjiGrad);

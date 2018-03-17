@@ -7,6 +7,9 @@ public class Restoran {
 	private String adresa;
 	int[] ocene;
 	private int brojMesta;
+	private double ocena;
+	private int maxOcena = 0;
+	private int minOcena = 10;
 	
 	// Globalana promenljiva
 	static int brojRestorana = 100;
@@ -112,6 +115,7 @@ public class Restoran {
 		System.out.println("Adresa: " + adresa);
 	}
 	
+	// Uslovno grananje - if naredba
 	public void velicinaRestorana() {
 		int x = brojMesta % 10;
 		if(x >=1 && x <= 4) System.out.println("Restoran moze da primi " + brojMesta + " gosta.");
@@ -128,8 +132,8 @@ public class Restoran {
 	
 	// Pozivanje metode unutar druge metode
 	public void ocenaRestorana() {
-		double prosecnaOcena = prosecnaOcena(ocene);
-		System.out.println("Prosecna ocena korisnika: " + prosecnaOcena);
+		ocena = prosecnaOcena(ocene);
+		System.out.println("\nProsecna ocena korisnika: " + ocena);
 	}
 	
 	public double novaProsecnaOcena(int ocena) {
@@ -144,12 +148,13 @@ public class Restoran {
 	// Ucitavanje sa tastature pomocu klase Scanner
 	public void oceniRestoran() {
 		Scanner in = new Scanner(System.in);
-		System.out.println("Unesite ocenu koju biste dali restoranu " + naziv + ": (1-10)");
+		System.out.println("Unesite ocenu koju biste dali restoranu " + naziv + ": (1-10, 0 ako ne zelite da ocenite)");
 		int novaOcena = in.nextInt();
 		//in.close();
+		if(novaOcena == 0) return;   // Koriscenje naredbe return kod metode bez povratne vrednosti
 		if(novaOcena >= 1 && novaOcena <= 10) {
-			double prosecnaOcena = novaProsecnaOcena(novaOcena);
-			System.out.println("Nova prosecna ocena restorana " + naziv + ": " + prosecnaOcena);
+			ocena = novaProsecnaOcena(novaOcena);
+			System.out.println("Nova prosecna ocena restorana " + naziv + ": " + ocena);
 		} else {
 			System.out.println("Ocena mora biti u intervalu 1-10! Pokusajte ponovo.");
 			Scanner in1 = new Scanner(System.in);
@@ -183,13 +188,31 @@ public class Restoran {
 	*/
 	
 	public void ispisi() {
-		System.out.println("Vlasnik");
+		System.out.println("\nVlasnik");
 		// Direktno se poziva metoda ispisi klase osoba da bi se ispisalo ime i prezime vlasnika
 		vlasnik.ispisi();
 		
-		System.out.println("Sef kuhinje");
+		System.out.println("\nSef kuhinje");
 		// Direktno se poziva metoda ispisi klase osoba da bi se ispisalo ime i prezime sefa kuhinje
 		sefKuhinje.ispisi();
+	}
+	
+	// Ciklicno ponavljeanje - for petlja
+	public void maxOcenaRestorana() {
+		for(int i = 0; i < ocene.length; i++) {
+			if(ocene[i] > maxOcena) maxOcena = ocene[i];
+		}
+		System.out.println("Maksimalna ocena restorana: " + maxOcena);
+	}
+	
+	// Ciklicno ponavljanje - while petlja
+	public void minOcenaRestorana() {
+		int i = 0;
+		while(i < ocene.length) {
+			if(ocene[i] < minOcena) minOcena = ocene[i];
+			i++;
+		}
+		System.out.println("Mnimalna ocena restorana: " + minOcena);
 	}
 	
 	// Pozivanje svih metoda odjednom
@@ -200,7 +223,9 @@ public class Restoran {
 		velicinaRestorana();
 		ispisi();
 		ocenaRestorana();
+		maxOcenaRestorana();
+		minOcenaRestorana();
 		oceniRestoran();
 	}
-
+	
 }
