@@ -27,6 +27,8 @@ public class Restoran implements SluzbaNabavke, SluzbaProdaje{
 	private int slobodniStolovi = 0;
 	private GregorianCalendar datumOtvaranja;  // Klasa gregorianCalendar
 	private int luksuznost;
+	private int namirnice;
+	private int pice;
 	
 	// Globalana promenljiva
 	static int brojRestorana = 100;
@@ -60,14 +62,19 @@ public class Restoran implements SluzbaNabavke, SluzbaProdaje{
 	}
 
 	public void setNaziv(String naziv) {
+		if(naziv == null) throw new RestoranException("Naziv restorana ne moze biti null");
 		this.naziv = naziv;
 	}
 
 	public String getOpstina() {
 		return opstina;
 	}
-
-	public void setOpstina(String opstina) {
+	
+	// Proveravani izuzetak klase Exception. Poziv metode koja baca proveravani izuzetak
+	// mora biti uokviren try-catch blokom koji hvata taj izuzeak, a metoda mora da bude
+	// oznacena rezervisanom reci throws i nazivom klase izuzetka koji baca.
+	public void setOpstina(String opstina) throws Exception{
+		if(opstina == null) throw new Exception("Naziv opstine ne moze biti null");
 		this.opstina = opstina;
 	}
 
@@ -76,6 +83,7 @@ public class Restoran implements SluzbaNabavke, SluzbaProdaje{
 	}
 
 	public void setAdresa(String adresa) {
+		if(adresa == null) throw new RestoranException("Adresa ne moze biti null");
 		this.adresa = adresa;
 	}
 
@@ -85,6 +93,7 @@ public class Restoran implements SluzbaNabavke, SluzbaProdaje{
 	}
 
 	public void setBrojMesta(int brojMesta) {
+		if(brojMesta < 0) throw new RestoranException("Broj mesta u restoranu mora biti veci od nule");
 		this.brojMesta = brojMesta;
 	}
 
@@ -93,6 +102,7 @@ public class Restoran implements SluzbaNabavke, SluzbaProdaje{
 	}
 
 	public void setOcene(int[] ocene) {
+		if(ocene == null) throw new RestoranException("Niz ocena ne moze biti null");
 		this.ocene = ocene;
 	}
 	
@@ -101,6 +111,7 @@ public class Restoran implements SluzbaNabavke, SluzbaProdaje{
 	}
 
 	public static void setBrojRestorana(int brojRestorana) {
+		if(brojRestorana < 0) throw new RestoranException("Broj restorana ne moze biti manji od nule");
 		Restoran.brojRestorana = brojRestorana;
 	}
 
@@ -109,6 +120,7 @@ public class Restoran implements SluzbaNabavke, SluzbaProdaje{
 	}
 
 	public void setSefKuhinje(SefKuhinje sefKuhinje) {
+		if(sefKuhinje == null) throw new RestoranException("Sef kuhinje ne moze biti null");
 		this.sefKuhinje = sefKuhinje;
 	}
 	
@@ -117,6 +129,7 @@ public class Restoran implements SluzbaNabavke, SluzbaProdaje{
 	}
 
 	public void setVlasnik(Vlasnik vlasnik) {
+		if(vlasnik == null) throw new RestoranException("Vlasnik ne moze biti null");
 		this.vlasnik = vlasnik;
 	}
 
@@ -125,6 +138,7 @@ public class Restoran implements SluzbaNabavke, SluzbaProdaje{
 	}
 
 	public void setMatrica(boolean[][] matrica) {
+		if(matrica == null) throw new RestoranException("Matrica zauzetosti stolova ne moze biti null");
 		this.matrica = matrica;
 	}
 	
@@ -133,6 +147,7 @@ public class Restoran implements SluzbaNabavke, SluzbaProdaje{
 	}
 
 	public void setDatumOtvaranja(GregorianCalendar date) {
+		if(date == null) throw new RestoranException("Datum otvaranja ne moze biti null");
 		this.datumOtvaranja = date;
 	}
 	
@@ -141,9 +156,30 @@ public class Restoran implements SluzbaNabavke, SluzbaProdaje{
 	}
 
 	public void setLuksuznost(int luksuznost) {
+		if(luksuznost < 1 || luksuznost > 5) throw new RestoranException("Ocena luksuznosti ne moze biti manja od 1 ili veca od 5");
 		this.luksuznost = luksuznost;
 	}
+	
+	public int getNamirnice() {
+		return namirnice;
+	}
 
+	public void setNamirnice(int namirnice) {
+		if(namirnice > 0) this.namirnice = namirnice;
+		//else System.out.println("Greska, kolicina namirnica mora biti veca od 0");
+		else throw new RestoranException("Greska, kolicina namirnica mora biti veca od 0");
+	}
+
+	public int getPice() {
+		return pice;
+	}
+
+	public void setPice(int pice) {
+		if(pice > 0) this.pice = pice;
+		//else System.out.println("Greska, kolicina pica mora biti veca od 0");
+		else throw new RestoranException("Greska, kolicina pica mora biti veca od 0");
+	}
+	
 	// Metode klase
 	public void ispisiNaziv() {
 		System.out.println("Naziv restorana: " + naziv);
@@ -391,34 +427,13 @@ public class Restoran implements SluzbaNabavke, SluzbaProdaje{
 		System.out.println("Najstariji restoran: " + najstariji + ". Datum otvaranja: " + datumOtvaranja);
 	}
 	
-	private int namirnice;
-	private int pice;
-	
-	public int getNamirnice() {
-		return namirnice;
-	}
-
-	public void setNamirnice(int namirnice) {
-		if(namirnice > 0) this.namirnice = namirnice;
-		else System.out.println("Greska, kolicina namirnica mora biti veca od 0");
-	}
-
-	public int getPice() {
-		return pice;
-	}
-
-	public void setPice(int pice) {
-		if(pice > 0) this.pice = pice;
-		else System.out.println("Greska, kolicina pica mora biti veca od 0");
-	}
-
 	// Metode koje implementiraju metode iz interfejsa moraju da budu javne (public)
 	@Override
 	public void prodajHranu(int kolicina) {
 		if(kolicina > 0 && namirnice >= kolicina) namirnice -= kolicina;
 		else {
-			if(kolicina < 0) System.out.println("Kolicina mora biti veca od nule");
-			else System.out.println("Nema dovoljno namirnica za pripremu hrane");
+			if(kolicina < 0) throw new RestoranException("Kolicina mora biti veca od nule");   //System.out.println("Kolicina mora biti veca od nule");
+			else throw new RestoranException("Nema dovoljno namirnica za pripremu hrane");  //System.out.println("Nema dovoljno namirnica za pripremu hrane");
 		}
 	}
 
@@ -426,21 +441,21 @@ public class Restoran implements SluzbaNabavke, SluzbaProdaje{
 	public void prodajPice(int kolicina) {
 		if(kolicina > 0 && pice >= kolicina) pice -= kolicina;
 		else {
-			if(kolicina < 0) System.out.println("Kolicina mora biti veca od nule");
-			else System.out.println("Nema dovoljno pica za uslugu gostiju");
+			if(kolicina < 0) throw new RestoranException("Kolicina mora biti veca od nule");  //System.out.println("Kolicina mora biti veca od nule");
+			else throw new RestoranException("Nema dovoljno pica za uslugu gostiju");  //System.out.println("Nema dovoljno pica za uslugu gostiju");
 		}
 	}
 
 	@Override
 	public void dodajNamirnice(int kolicina) {
 		if(kolicina > 0) namirnice += kolicina;
-		else System.out.println("Kolicina mora biti veca od nule");
+		else throw new RestoranException("Kolicina mora biti veca od nule");  //System.out.println("Kolicina mora biti veca od nule");
 	}
 
 	@Override
 	public void dodajPice(int kolicina) {
 		if(kolicina > 0) pice += kolicina;
-		else System.out.println("Kolicina mora biti veca od nule");
+		else throw new RestoranException("Kolicina mora biti veca od nule");  //System.out.println("Kolicina mora biti veca od nule");
 	}
 	
 	public void ispisiStanjeNamirnice() {
@@ -475,5 +490,6 @@ public class Restoran implements SluzbaNabavke, SluzbaProdaje{
 		return "Restoran [naziv=" + naziv + ", opstina=" + opstina + ", adresa=" + adresa + ", ocena=" + ocena
 				+ ", vlasnik=" + vlasnik + ", namirnice=" + namirnice + ", pice=" + pice + "]";
 	}
+	
 }
 	

@@ -5,6 +5,7 @@ import java.util.GregorianCalendar;
 import eksterniSaradnici.Dobavljac;
 import usluzniObjekat.Ostava;
 import usluzniObjekat.Restoran;
+import usluzniObjekat.RestoranException;
 import zaposleni.osoblje.Kelner;
 import zaposleni.osoblje.SefKuhinje;
 import zaposleni.vlasnik.Vlasnik;
@@ -31,8 +32,19 @@ public class Test {
 		// Inicijalizacija objekta preko setera - 2. nacin
 		Restoran donjiGrad =  new Restoran();
 		
-		donjiGrad.setNaziv("Donji grad");
-		donjiGrad.setOpstina("Stari Grad");
+		// try-catch blok
+		try {
+			donjiGrad.setNaziv("Donji grad");
+		} catch (RestoranException e){
+			System.out.println("Greska: " + e.getMessage());
+		}
+		//Ako metoda baca proveravani izuzetak, onda ona mora da se uokviri try-catch blokom.
+		// Ako metoda baca neproveravani izuzetak (Runtimeexception) onda ona moze ali ne mora da se uokviri try-catch blokom.
+		try {
+			donjiGrad.setOpstina("Stari Grad");
+		} catch (Exception e) {
+			System.out.println("Greska: " + e.getMessage());
+		}
 		donjiGrad.setAdresa("Visokog Stefana 54");
 		int[] oceneDonjiGrad = {8,6,7,7,8,5,9,6,8,7}; // Inicijalizacija niza - 1. nacin
 		// Inicijalizacija niza - 2. nacin

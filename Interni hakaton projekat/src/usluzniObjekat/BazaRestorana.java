@@ -74,4 +74,5 @@ public class BazaRestorana {
 			if(restorani.get(i).getLuksuznost() == luksuz) System.out.println(restorani.get(i));
 		}
 	}
+	
 }
