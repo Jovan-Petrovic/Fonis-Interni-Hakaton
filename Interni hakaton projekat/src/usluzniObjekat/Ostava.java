@@ -68,4 +68,3 @@ public class Ostava implements SluzbaNabavke{
 		
 	}
 }
-

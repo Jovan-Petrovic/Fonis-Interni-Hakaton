@@ -26,6 +26,7 @@ public class Restoran implements SluzbaNabavke, SluzbaProdaje{
 	private boolean[][] matrica;
 	private int slobodniStolovi = 0;
 	private GregorianCalendar datumOtvaranja;  // Klasa gregorianCalendar
+	private int luksuznost;
 	
 	// Globalana promenljiva
 	static int brojRestorana = 100;
@@ -134,6 +135,14 @@ public class Restoran implements SluzbaNabavke, SluzbaProdaje{
 	public void setDatumOtvaranja(GregorianCalendar date) {
 		this.datumOtvaranja = date;
 	}
+	
+	public int getLuksuznost() {
+		return luksuznost;
+	}
+
+	public void setLuksuznost(int luksuznost) {
+		this.luksuznost = luksuznost;
+	}
 
 	// Metode klase
 	public void ispisiNaziv() {
@@ -155,7 +164,7 @@ public class Restoran implements SluzbaNabavke, SluzbaProdaje{
 		else System.out.println("Restoran moze da primi " + brojMesta + " gostiju");
 	}
 	
-	public double prosecnaOcena(int[] ocene) {
+	public double prosecnaOcena() {
 		int ukupno = 0;
 		for(int i = 0; i < ocene.length; i++) {
 			ukupno += ocene[i];
@@ -165,7 +174,7 @@ public class Restoran implements SluzbaNabavke, SluzbaProdaje{
 	
 	// Pozivanje metode unutar druge metode
 	public void ocenaRestorana() {
-		ocena = prosecnaOcena(ocene);
+		ocena = prosecnaOcena();
 		System.out.println("\nProsecna ocena korisnika: " + ocena);
 	}
 	
@@ -351,19 +360,22 @@ public class Restoran implements SluzbaNabavke, SluzbaProdaje{
 	}
 	
 	// Nizovi objekata, substring metoda, konverzija iz stringa u int koriscenjem parseInt metode
-	public Zaposleni[] rodjeniPosle1970(Zaposleni[] osobe) {
-		Zaposleni[] vlasniciPosle1970 = new Zaposleni[1000];
+	public void rodjeniPosle1970(Vlasnik[] vlasnici) {
+		Vlasnik[] vlasniciPosle1970 = new Vlasnik[1000];
 		int br = 0;
-		for(int i  = 0; i < osobe.length; i++) {
-			String godina = osobe[i].jmbg.substring(5,8);
+		for(int i  = 0; i < vlasnici.length; i++) {
+			String godina = vlasnici[i].jmbg.substring(5,8);
 			int godina1 = Integer.parseInt(godina);
-			if(godina1 > 970) vlasniciPosle1970[br++] = osobe[i];
+			if(godina1 > 970) vlasniciPosle1970[br++] = vlasnici[i];
 		}
 		if(br == 0) {
 			System.out.println("Nema vlasnika rodjenih posle 1970. godine");
-			return null;
+			return;
 		}
-		return vlasniciPosle1970;
+		System.out.println("Vlasnici rodjeni posle 1970. godine");
+		for(int i = 0; i < vlasniciPosle1970.length; i++) {
+			System.out.println(vlasniciPosle1970[i]);
+		}
 	}
 	
 	// Upotreba GregorianCalendar-a
@@ -443,4 +455,25 @@ public class Restoran implements SluzbaNabavke, SluzbaProdaje{
 		ispisiStanjeNamirnice();
 		ispisiStanjePice();
 	}
+	
+	// equals metoda - poredi dva objekta i vraca true ako su jednaki a false ako nisu
+	// potrebno je redefinisati je
+	public boolean equals(Object o) {
+		// Uneti objekat se mora eksplicitno konvertovati u odgovarajuci tip
+		// pre toga potrebno je proveriti da li je Object o stvarno objekat zeljene klase (Restoran)
+		// operator instanceof
+		if(o instanceof Restoran) {
+			Restoran r = (Restoran) (o);
+			if(naziv.equals(r.getNaziv()) && adresa.equals(r.getAdresa())) return true;
+			return false;
+		}
+		return false;
+	}
+
+	@Override
+	public String toString() {
+		return "Restoran [naziv=" + naziv + ", opstina=" + opstina + ", adresa=" + adresa + ", ocena=" + ocena
+				+ ", vlasnik=" + vlasnik + ", namirnice=" + namirnice + ", pice=" + pice + "]";
+	}
 }
+	

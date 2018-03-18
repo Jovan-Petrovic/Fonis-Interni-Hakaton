@@ -3,7 +3,8 @@ package zaposleni.vlasnik;
 public class Vlasnik {
 	private String ime;
 	private String prezime;
-	private String jmbg;
+	// public da bi koristili substring metodu
+	public String jmbg;
 	
 	public String getIme() {
 		return ime;

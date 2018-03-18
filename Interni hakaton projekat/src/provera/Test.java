@@ -133,6 +133,7 @@ public class Test {
 		System.out.println("Novo stanje ostave");
 		donjiGradOstava.ispisiStanje();
 		
+		
 	}
 
 }
