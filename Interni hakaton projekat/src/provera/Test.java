@@ -3,6 +3,7 @@ package provera;
 import java.util.GregorianCalendar;
 
 import eksterniSaradnici.Dobavljac;
+import usluzniObjekat.BazaRestorana;
 import usluzniObjekat.Ostava;
 import usluzniObjekat.Restoran;
 import usluzniObjekat.RestoranException;
@@ -92,20 +93,20 @@ public class Test {
 		
 		
 		
-		donjiGrad.sveOrestoranu();
-		donjiGrad.matricneMetode();
+		//donjiGrad.sveOrestoranu();
+		//donjiGrad.matricneMetode();
 		
 		donjiGrad.glavniKelner = new Kelner("Zoran", "Zivkovic", "0206996532653");
 		donjiGrad.sefKuhinje = new SefKuhinje("Petar", "Stojanovic", "0911992563565");
 		
 		// Ispisivanje - 1. nacin: toString metoda
-		System.out.println(donjiGrad.glavniKelner);
+		//System.out.println(donjiGrad.glavniKelner);
 		// Ispisivanje - 2. nacin: redefinisana metoda ispisi klase Kelner
 		//donjiGrad.glavniKelner.ispisi();
-		donjiGrad.glavniKelner.izracunajPlatu(100);
-		System.out.println(donjiGrad.sefKuhinje);
+		//donjiGrad.glavniKelner.izracunajPlatu(100);
+		//System.out.println(donjiGrad.sefKuhinje);
 		//donjiGrad.sefKuhinje.ispisi();
-		donjiGrad.sefKuhinje.izracunajPlatu(100);
+		//donjiGrad.sefKuhinje.izracunajPlatu(100);
 		
 		// Primer kako ista metoda moze da opsluzuje vise klasa ako se koriste interfejsi. Kada se oni ne bi koristili, 
 		// morale bi da se u okviru klase Dobavljac napisu dve metode izvrsiIsporuku koje bi radile isto samo bi jedna
@@ -126,7 +127,7 @@ public class Test {
 		donjiGrad.setPice(420);
 		donjiGradOstava.setStanjeNaSkladistuNamirnice(100);
 		donjiGradOstava.setStanjeNaSkladistuPice(110);
-		
+		/*
 		System.out.println();
 		donjiGrad.ispisiStanje();
 		donjiGradOstava.ispisiStanje();
@@ -144,7 +145,13 @@ public class Test {
 		donjiGrad.ispisiStanje();
 		System.out.println("Novo stanje ostave");
 		donjiGradOstava.ispisiStanje();
+		*/
 		
+		BazaRestorana.ispisiSverestoraneIzBaze("BazaRestorana.txt");
+		BazaRestorana.dodajRestoranUBazu("BazaRestorana.txt");
+		BazaRestorana.ispisiSverestoraneIzBaze("BazaRestorana.txt");
+		BazaRestorana.dodajRestoranUBazu("BazaRestorana.txt");
+		BazaRestorana.ispisiSverestoraneIzBaze("BazaRestorana.txt");
 		
 	}
 

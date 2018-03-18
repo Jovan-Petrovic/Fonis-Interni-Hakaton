@@ -1,5 +1,13 @@
 package usluzniObjekat;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
@@ -487,9 +495,8 @@ public class Restoran implements SluzbaNabavke, SluzbaProdaje{
 
 	@Override
 	public String toString() {
-		return "Restoran [naziv=" + naziv + ", opstina=" + opstina + ", adresa=" + adresa + ", ocena=" + ocena
-				+ ", vlasnik=" + vlasnik + ", namirnice=" + namirnice + ", pice=" + pice + "]";
+		return "Restoran: naziv=" + naziv + ", opstina=" + opstina + ", adresa=" + adresa + ", ocena=" + ocena
+				+ ", vlasnik=" + vlasnik;
 	}
 	
-}
-	
+}	

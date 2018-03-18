@@ -1,6 +1,14 @@
 package usluzniObjekat;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public class BazaRestorana {
 	// Liste
@@ -74,5 +82,74 @@ public class BazaRestorana {
 			if(restorani.get(i).getLuksuznost() == luksuz) System.out.println(restorani.get(i));
 		}
 	}
+	
+	// Rad sa tekstualnim fajlovima, ucitavanje sa tastature pomocu klase BufferedReader
+		public static void dodajRestoranUBazu(String fajl) {
+			try {
+				// Upisivanje u tekstualni fajl vrsi se koriscenjem klase PrintWriter
+				PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(fajl, true)));
+				Scanner in1 = new Scanner(System.in);
+				System.out.print("Unesite naziv restorana: ");
+				String s1 = in1.nextLine();
+				Scanner in2 = new Scanner(System.in);
+				System.out.print("Unesite opstinu restorana: ");
+				String s2 = in2.nextLine();
+				Scanner in3 = new Scanner(System.in);
+				System.out.print("Unesite adresu restorana: ");
+				String s3 = in3.nextLine();
+				Scanner in4 = new Scanner(System.in);
+				System.out.print("Unesite ocenu restorana: ");
+				double s4 = in4.nextDouble();
+				String restoran = s1 + " " + s2 + " " + s3 + " " + s4;
+				out.println(restoran);
+				out.close();
+			} catch (IOException e) {
+				System.out.println("Greska: " + e.getMessage());
+			}
+		}
+		
+		// Vise metoda moze biti istog imena ali moraju imati razlicitu povratnu vrednost ili broj ili tip parametara
+		public static void dodajRestoranUBazu(Restoran r, String fajl) {
+			try {
+				PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(fajl, true)));
+				String s1 = r.getNaziv();
+				String s2 = r.getOpstina();
+				String s3 = r.getAdresa();
+				double s4 = r.prosecnaOcena();
+				String pom = s1 + " " + s2 + " " + s3 + " " + s4;
+				out.println(pom);
+				out.close();
+			} catch (Exception e) {
+				System.out.println("Greska: " + e.getMessage());
+			}
+		}
+		
+		public static void ispisiSverestoraneIzBaze(String fajl) {
+			try {
+				// Citanje iz tekstualnog fajla koriscenjem klase BufferedReader
+				BufferedReader in = new BufferedReader (new FileReader(fajl));
+				boolean kraj = false;
+				String s = "";
+				
+				while (!kraj) {
+					String pom = "";
+					try {
+						pom = in.readLine();
+					} catch (IOException e) {
+						System.out.println("Greska: " + e.getMessage());
+					}
+					if (pom == null) kraj = true;
+					else s = s + pom + "\n";
+				}
+				
+				in.close();
+				System.out.println("Svi restorani iz baze");
+				System.out.println(s);
+			} catch (FileNotFoundException e) {
+				System.out.println("Greska: " + e.getMessage());
+			} catch (IOException e) {
+				System.out.println("Greska: " + e.getMessage());
+			}
+		}
 	
 }
